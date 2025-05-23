@@ -1,7 +1,7 @@
 from flask import Flask
 import time
 
-app = Flash(__name__)
+app = Flask(__name__)
 
 @app.route("/")
 def get_time():
