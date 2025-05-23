@@ -21,7 +21,7 @@ jobs:
         
       - name: Build Docker Image
         run: |
-          docker build -t ${{ sercrets.DOCKERHUB_USERNAME }}/devops-project-docker-repo:${{ env.SHORT_SHA }} .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/devops-project-docker-repo:${{ env.SHORT_SHA }} .
 
       - name: Login To Docker Hub
         run: |
