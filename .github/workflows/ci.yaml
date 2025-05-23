@@ -17,11 +17,11 @@ jobs:
 
       - name: Set Short SHA
         run: |
-          echo "SHORT_SHA=$(echo ${GITHUB_SHA} | CUT -c1-7)" >> $GITHUB_ENV
+          echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
         
       - name: Build Docker Image
         run: |
-          docker build -t kingu13/devops-project-docker-repo:${{ env.SHORT_SHA }} .
+          docker build -t ${{ DOCKERHUB_USERNAME }}/devops-project-docker-repo:${{ env.SHORT_SHA }} .
 
       - name: Login To Docker Hub
         run: |
@@ -29,4 +29,4 @@ jobs:
 
       - name: Push Image
         run: |
-          docker push kingu13/devops-project-docker-repo:${{ env.SHORT_SHA }}
+          docker push ${{ DOCKERHUB_USERNAME }}/devops-project-docker-repo:${{ env.SHORT_SHA }}
