@@ -32,3 +32,15 @@ jobs:
       - name: Push Image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-project-docker-repo:${{ env.SHORT_SHA }}
+
+      - name: Configure Git Auth
+        run: |
+          git config --local user.email ${{ secrets.USER_EMAIL }}
+          git config --local user.name ${{ secrets.USERNAME }}
+
+      - name: Update Helm Chart With New Image Tag
+        run: |
+          sed -i "s/tag:.*/tag: ${{ env.SHORT_SHA }}/" ./devops-project-time-printer/values.yaml
+          git add ./devops-project-time-printer/values.yaml
+          git commit -m "Updated image tag to ${{ env.SHORT_SHA }}"
+          git push 
