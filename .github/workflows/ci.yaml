@@ -37,7 +37,7 @@ jobs:
         run: |
           git config --local user.email ${{ secrets.USER_EMAIL }}
           git config --local user.name ${{ secrets.USERNAME }}
-
+        
       - name: Update Helm Chart With New Image Tag
         run: |
           sed -i "s/tag:.*/tag: ${{ env.SHORT_SHA }}/" ./devops-project-time-printer/values.yaml
